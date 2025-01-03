@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin@2025 
+    ports:
+      - "1433:1433"  # Mapeando a porta 1433 do container para a porta 1433 no host
+    networks:
+      - app_network
+    restart: always
+
+  app:
+    build:
+      context: .  # Diretorio onde o Dockerfile esta localizado
+      dockerfile: ThundersTasks.API/Dockerfile  # Nome do seu Dockerfile
+    container_name: thunders-tasks-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=dbTarefas;User Id=sa;Password=Admin@2025;
+    ports:
+      - "8080:8080"  # Mapeia a porta 8080 do host para a porta 80 do container (onde o ASP.NET Core serao exposto)
+    depends_on:
+      - db  # Garante que o container db seja iniciado antes da aplicacao
+    networks:
+      - app_network
+    restart: always
+
+networks:
+  app_network:
+    driver: bridge
