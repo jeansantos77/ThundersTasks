@@ -39,7 +39,7 @@ namespace ThundersTasks.API.Controllers
                 return BadRequest($"Erro ao adicionar tarefa: { ex.InnerException?.Message ?? ex.Message }");
             }
 
-            return StatusCode(StatusCodes.Status201Created, taskCreated);
+            return CreatedAtAction(nameof(Add), new { id = taskCreated.Id }, taskCreated);
         }
 
         [HttpPut("{id}")]
@@ -107,7 +107,7 @@ namespace ThundersTasks.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro ao atualizar tarefa: { ex.InnerException?.Message ?? ex.Message }");
+                return BadRequest($"Erro ao deletar tarefa: { ex.InnerException?.Message ?? ex.Message }");
             }
 
             return Ok();
@@ -128,7 +128,14 @@ namespace ThundersTasks.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return Ok(await _tarefaService.GetById(id));
+            var tarefa = await _tarefaService.GetById(id);
+
+            if (tarefa == null)
+            {
+                return NotFound();  
+            }
+
+            return Ok(tarefa); 
         }
 
     }

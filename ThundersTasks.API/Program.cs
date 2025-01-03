@@ -27,12 +27,23 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
+//using (var scope = app.Services.CreateScope())
 //{
+//    var dbContext = scope.ServiceProvider.GetRequiredService<TarefaContext>();
+    
+//    var pendingMigrations = dbContext.Database.GetPendingMigrations();
+//    if (pendingMigrations.Any())
+//    {
+//        dbContext.Database.Migrate();
+//    }
+//}
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.UseHttpsRedirection();
 

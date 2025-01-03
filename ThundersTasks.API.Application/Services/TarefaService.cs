@@ -20,6 +20,7 @@ namespace ThundersTasks.API.Application.Services
         public async Task<TarefaDto> Add(TarefaDto entity)
         {
             Tarefa mapEntity = _mapper.Map<Tarefa>(entity);
+            mapEntity.Id = 0;
 
             Validation(mapEntity);
 
@@ -30,7 +31,7 @@ namespace ThundersTasks.API.Application.Services
 
         private static void Validation(Tarefa tarefa)
         {
-            if (tarefa.Conclusao > DateTime.Today)
+            if (tarefa.Conclusao > DateTime.UtcNow)
             {
                 throw new Exception("A data de conclusão da tarefa NÃO pode ser superior a data atual.");
             }
@@ -38,9 +39,9 @@ namespace ThundersTasks.API.Application.Services
 
         public async Task<TarefaDto> ConcluirTarefa(int id)
         {
-            Tarefa tarefa = await _tarefaRepository.GetByIdAsNoTracking(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrado.");
+            Tarefa tarefa = await _tarefaRepository.GetByIdAsNoTracking(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrada.");
 
-            tarefa.Conclusao = DateTime.Now;
+            tarefa.Conclusao = DateTime.UtcNow;
 
             await _tarefaRepository.Update(tarefa);
 
@@ -49,10 +50,9 @@ namespace ThundersTasks.API.Application.Services
 
         public async Task Delete(int id)
         {
-            TarefaDto tarefa = await GetById(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrado.");
-            Tarefa mapEntity = _mapper.Map<Tarefa>(tarefa);
+            Tarefa tarefa = await _tarefaRepository.GetByIdAsNoTracking(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrada.");
 
-            await _tarefaRepository.Delete(mapEntity);
+            await _tarefaRepository.Delete(tarefa);
         }
 
         public async Task<List<TarefaDto>> GetAll()
@@ -67,9 +67,10 @@ namespace ThundersTasks.API.Application.Services
 
         public async Task Update(TarefaDto entity, int id)
         {
-            Tarefa tarefa = await _tarefaRepository.GetByIdAsNoTracking(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrado.");
+            Tarefa tarefa = await _tarefaRepository.GetByIdAsNoTracking(id) ?? throw new Exception($"Tarefa [ Id = {id}] não encontrada.");
 
             tarefa = _mapper.Map<Tarefa>(entity);
+            tarefa.Id = id;
 
             Validation(tarefa);
 
