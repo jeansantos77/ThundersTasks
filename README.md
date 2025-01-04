@@ -46,7 +46,7 @@ Para rodar o projeto com Docker, siga as instruções abaixo. Isso irá configurar 
 
 Dentro da pasta ThundersTasks\ThundersTasks.API.Tests\Coverage tem a imagem do relatório gerado da cobertura de testes. A mesma pode ser visualizada abaixo:
 
-![Cobertura dos testes unitários](ThundersTasks.API.Tests/Coverage/coverage.png)
+![Cobertura dos testes unitários](ThundersTasks.API.Tests/Coverage/Coverage.png)
 
 ### Testes Passed
 
