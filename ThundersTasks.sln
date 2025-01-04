@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThundersTasks.API.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThundersTasks.API.Application", "ThundersTasks.API.Application\ThundersTasks.API.Application.csproj", "{F3461EC5-7C65-4F12-BE5E-1FFEDA88DFD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThundersTasks.API.Tests", "ThundersTasks.API.Tests\ThundersTasks.API.Tests.csproj", "{9C44B41F-A96B-422B-88CE-6AD1A3CE4822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThundersTasks.API.Tests", "ThundersTasks.API.Tests\ThundersTasks.API.Tests.csproj", "{9C44B41F-A96B-422B-88CE-6AD1A3CE4822}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{857FAE2C-53AC-4D39-ADA4-DB2D1479B964}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
