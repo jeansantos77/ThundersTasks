@@ -30,11 +30,13 @@ Para rodar o projeto com Docker, siga as instruções abaixo. Isso irá configurar 
 1. Clone o repositório:
    git clone https://github.com/jeansantos77/ThundersTasks.git
 2. Entrar no CMD
-3. Entrar na pasta ThundersTasks e executar o comando para criar os containers
-	docker compose up --build -d
+3. Entrar na pasta ThundersTasks e executar o comando para criar os containers  
+     
+    **docker compose up --build -d**
 
 4. Dentro da pasta ThundersTasks\ThundersTasks.API.Infra.Data executar o comando para rodar a migration
-    dotnet ef database update
+    
+    **dotnet ef database update**
 
 5. Abrir o swagger no navegador através da URL
     http://localhost:8080/swagger/index.html
